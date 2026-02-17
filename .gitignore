@@ -1,0 +1,11 @@
+# Python cache
+pycache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+.env
+.idea
+
