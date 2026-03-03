@@ -1,11 +1,29 @@
 # Python cache
-pycache/
+__pycache__/
+.pytest_cache/
 
 # Jupyter
 .ipynb_checkpoints/
 
 # Virtual environments
 .venv/
+venv/
+env/
 .env
-.idea
 
+# IDE
+.idea/
+.vscode/
+
+# --- Spark / Hadoop / Logs ---
+logs/
+*.log
+spark-warehouse/
+metastore_db/
+derby.log
+eventLogDir/
+.sparkStaging/
+result.csv/
+
+# --- Docker overrides ---
+docker-compose.override.yml
