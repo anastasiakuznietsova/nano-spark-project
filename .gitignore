@@ -15,6 +15,9 @@ env/
 .idea/
 .vscode/
 
+# Raw Data
+raw_data/
+
 # --- Spark / Hadoop / Logs ---
 logs/
 *.log
