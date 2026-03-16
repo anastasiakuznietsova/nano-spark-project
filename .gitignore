@@ -27,3 +27,6 @@ result.csv/
 
 # --- Docker overrides ---
 docker-compose.override.yml
+
+# --- Data ---
+data/
