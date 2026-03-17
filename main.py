@@ -1,19 +1,21 @@
 from pyspark.sql import SparkSession
-import os
-import sys
+from data_pipeline import load_and_validate_music_data
 
-os.environ['PYSPARK_PYTHON'] = sys.executable
-os.environ['PYSPARK_DRIVER_PYTHON'] = sys.executable
+def main():
+    spark = SparkSession.builder \
+        .appName("MusicPipeline") \
+        .getOrCreate()
 
-spark = SparkSession.builder \
-    .appName("TestApp") \
-    .getOrCreate()
+    spark.sparkContext.setLogLevel("WARN")
 
-data = [(1,"Test Set 1"), (2,"Test Set 2"), (3,"Test Set 3")]    # create fake test data
-columns = ["ID","Name"]    # column names
-df = spark.createDataFrame(data, schema=columns)
+    file_path = "raw_data/spotify_dataset.csv"
 
-df.show()
-df.write.csv("result.csv")
+    try:
+        df = load_and_validate_music_data(spark, file_path)
+        df.show(5)
+    except Exception as e:
+        print(f"Pipeline execution error: {e}")
 
-spark.stop()
+
+if __name__ == "__main__":
+    main()
