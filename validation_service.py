@@ -1,8 +1,4 @@
-from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
-from schemas import get_data_schema
-from load_data import extract_music_data
-
 
 def run_validation(df):
     print("\n" + "=" * 50)
@@ -47,26 +43,3 @@ def run_validation(df):
     print("=" * 50 + "\n")
 
 
-def main():
-    spark = SparkSession.builder \
-        .appName("MusicDataValidation") \
-        .getOrCreate()
-
-    spark.sparkContext.setLogLevel("WARN")
-
-    file_path = "raw_data/spotify_dataset.csv"
-    schema = get_data_schema()
-
-    try:
-        df = extract_music_data(spark, file_path, schema)
-
-        run_validation(df)
-
-        df.show(5)
-
-    except Exception as e:
-        print(f"Помилка під час валідації: {e}")
-
-
-if __name__ == "__main__":
-    main()
