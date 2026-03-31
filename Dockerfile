@@ -9,7 +9,7 @@ RUN apt-get update && \
     ln -s /usr/bin/python3 /usr/bin/python
 
 # PySpark
-RUN pip3 install --no-cache-dir pyspark
+RUN pip3 install --no-cache-dir pyspark numpy
 
 COPY . /app
 
