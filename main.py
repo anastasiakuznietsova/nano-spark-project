@@ -1,5 +1,6 @@
 from pyspark.sql import SparkSession
 from data_pipeline import load_and_validate_music_data
+from data_cleaning import clean_music_data
 
 def main():
     spark = SparkSession.builder \
@@ -13,6 +14,8 @@ def main():
     try:
         df = load_and_validate_music_data(spark, file_path)
         df.show(5)
+
+        cleaned_df = clean_music_data(df)
     except Exception as e:
         print(f"Pipeline execution error: {e}")
 
