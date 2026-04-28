@@ -35,3 +35,20 @@ def transform_and_scale_data(df):
 
     print(f"\nTransformation complete. Total columns in result: {len(df.columns)}")
     return df
+
+def transform_data(df):
+
+    df = df.withColumn('Loudness (db)',
+                       F.regexp_replace(F.col('Loudness (db)'), '(?i)db', '')
+                       .cast(DoubleType()))
+
+    time_split = F.split(F.col('Length'), ':')
+    df = df.withColumn('Length',
+                       (time_split.getItem(0).cast(IntegerType()) * 60) +
+                       (time_split.getItem(1).cast(IntegerType())))
+
+    df = df.withColumn('Explicit', F.when(F.col('Explicit') == 'Yes', 1).otherwise(0))
+
+    print(f"\nTransformation complete. Total columns in result: {len(df.columns)}")
+
+    return df

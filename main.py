@@ -3,7 +3,7 @@ from data_pipeline import load_and_validate_music_data
 from data_cleaning import clean_music_data
 from statistical_analysis import perform_statistical_analysis
 from feature_selection import select_columns, split_data
-from data_typing import transform_and_scale_data
+from data_typing import transform_data
 
 def main():
     spark = SparkSession.builder \
@@ -23,7 +23,7 @@ def main():
         df = clean_music_data(df)
         perform_statistical_analysis(df)
         df = select_columns(df)
-        df = transform_and_scale_data(df)
+        df = transform_data(df)
         train_df, val_df, test_df = split_data(df)
 
     except Exception as e:
