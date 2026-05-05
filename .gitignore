@@ -17,6 +17,7 @@ env/
 
 # Raw Data
 raw_data/
+results/
 
 # --- Spark / Hadoop / Logs ---
 logs/
